@@ -55,16 +55,29 @@ class DBase{
         }
 
         void daftar(){
-            string norek,nama,saldo;
+            string norek,nama,saldo,no_rekening,nama1,saldo1;
+	        again:
             cout <<"masukan no rekening : ";
-            cin >> norek;
-            cout <<"masukan nama : ";
-            cin >> nama;
-            cout <<"masukan saldo awal : ";
-            cin >> saldo;
-
+            cin >> no_rekening;
+	        DBase::in.open(DBase::namaFile,ios::in);
+	        while(!DBase::in.eof()){
+		        DBase::in >> norek;
+		        DBase::in >> nama;
+		        DBase::in >> saldo;  
+	        }
+	        if(no_rekening == norek){
+		        cout <<"No rekening ini sudah di gunakan"<< endl;
+		        system("pause");
+		    goto again; 
+	        }else{
+                cout <<"masukan nama : ";
+                cin >> nama;
+                cout <<"masukan saldo awal : ";
+                cin >> saldo;
+            }
             bank data(norek,nama,saldo);
             this->save(data);
+            DBase::in.close();
         }
 
         void nabung(){
@@ -158,6 +171,7 @@ int main(){
                 cout << endl;
             break;
             case 5:
+                cout <<"fitur ini masih dalam tahap pengembangan...." << endl;
             break;
             case 6:
                 system("pause");
