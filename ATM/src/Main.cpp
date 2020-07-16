@@ -39,7 +39,8 @@ class DBase{
 
         void show(){
             DBase::in.open(DBase::namaFile,ios::in);
-            string norek,nama,saldo;
+            string norek,nama;
+            double saldo;
             int indek=1;
             while(!DBase::in.eof()){
                 DBase::in >> norek;
@@ -47,37 +48,23 @@ class DBase{
                 DBase::in >> saldo;
 
                 cout << indek++ <<"\t";
-                cout << norek + "\t\t";
-                cout << nama + "\t\t";
+                cout << norek << "\t\t";
+                cout << nama << "\t\t";
                 cout << saldo << endl;
             }
             DBase::in.close();
         }
 
         void daftar(){
-            string norek,nama,saldo,no_rekening,nama1,saldo1;
-	        again:
+            string norek,nama,saldo;
             cout <<"masukan no rekening : ";
-            cin >> no_rekening;
-	        DBase::in.open(DBase::namaFile,ios::in);
-	        while(!DBase::in.eof()){
-		        DBase::in >> norek;
-		        DBase::in >> nama;
-		        DBase::in >> saldo;  
-	        }
-	        if(no_rekening == norek){
-		        cout <<"No rekening ini sudah di gunakan"<< endl;
-		        system("pause");
-		    goto again; 
-	        }else{
-                cout <<"masukan nama : ";
-                cin >> nama;
-                cout <<"masukan saldo awal : ";
-                cin >> saldo;
-            }
+            cin >> norek;
+            cout <<"masukan nama : ";
+            cin >> nama;
+            cout <<"masukan saldo awal Rp.";
+            cin >> saldo;
             bank data(norek,nama,saldo);
             this->save(data);
-            DBase::in.close();
         }
 
         void nabung(){
@@ -85,7 +72,8 @@ class DBase{
             lagi:
             cout <<"masukna no rekening : ";
             DBase::in.open(DBase::namaFile,ios::in);
-            string no_rekening,norek,saldo,nama;
+            string no_rekening,norek,nama;
+            double saldo;
             while(!DBase::in.eof()){
                 DBase::in >> norek;
                 DBase::in >> nama;
@@ -167,11 +155,12 @@ int main(){
                 cout << endl;
             break;
             case 4:
+                cout << endl;
                 data.show();
                 cout << endl;
             break;
             case 5:
-                cout <<"fitur ini masih dalam tahap pengembangan...." << endl;
+                cout <<"fitur ini masih dalam tahap pengembangan...." << endl << endl;
             break;
             case 6:
                 system("pause");
